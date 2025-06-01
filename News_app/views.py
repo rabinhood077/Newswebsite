@@ -43,3 +43,43 @@ def post_delete(request,pk):
   post=Post.objects.get(pk=pk)
   post.delete()
   return redirect("post-list")
+
+
+
+def post_create(request):
+  if request.method=="GET":
+    form=Postform()
+    return render(
+      request,"post_create.html",
+      {"form":form}
+    )
+    
+  else:
+    form=PoatForm(request.POST)
+    if form.is_vlaid:
+      post=post.save(commit=flase)
+      post.author=request.user
+      post.save()
+      return render("draft-detail",pk=post.pk)
+
+
+     else:
+      return render(
+        request,
+        "post_create.html",
+        {"form":form}
+      ) 
+
+
+def post_update(request,pk):
+  if request.method="GET":
+    post=post.objects.get(pk=pk)
+    
+
+
+
+
+
+
+
+
